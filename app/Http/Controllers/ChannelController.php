@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreChannelRequest;
 use App\Http\Requests\UpdateChannelRequest;
+use App\Http\Resources\ChannelCollection;
 use App\Http\Resources\ChannelResource;
 use App\Models\Channel;
 
@@ -14,7 +15,7 @@ class ChannelController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return ChannelResource::collection(Channel::all());
+        return new ChannelCollection(Channel::all());
     }
 
     /**
