@@ -14,9 +14,6 @@ class ChannelCollection extends ResourceCollection {
     public function toArray($request) {
         return [
             'data' => $this->collection,
-            'links' => [
-                'upload-gambar' => 'link-value',
-            ],
         ];
     }
 }
