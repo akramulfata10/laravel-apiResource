@@ -27,6 +27,7 @@ class UpdateChannelRequest extends FormRequest
             'title' => 'required|max:255|string',
             'link_youtube' => 'required|max:255|string',
             'ispublish' => 'boolean',
+            'cover' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ];
     }
 }

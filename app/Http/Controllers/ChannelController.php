@@ -15,7 +15,7 @@ class ChannelController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return new ChannelCollection(Channel::all());
+        return new ChannelCollection(Channel::latest()->get());
     }
 
     /**
@@ -35,6 +35,11 @@ class ChannelController extends Controller {
      */
     public function store(StoreChannelRequest $request) {
         $validateData = Channel::create($request->validated());
+        if ($validateData) {
+            if ($request->hasFile('cover')) {
+                $validateData->addMediaFromRequest('cover')->toMediaCollection('covers');
+            }
+        }
         return new ChannelResource($validateData);
     }
 
@@ -66,6 +71,12 @@ class ChannelController extends Controller {
      */
     public function update(UpdateChannelRequest $request, Channel $channel) {
         $channel->update($request->validated());
+        if ($channel) {
+            if ($request->hasFile('cover')) {
+                $channel->clearMediaCollection('covers');
+                $channel->addMediaFromRequest('cover')->toMediaCollection('covers');
+            }
+        }
         return new ChannelResource($channel);
     }
 
@@ -77,6 +88,7 @@ class ChannelController extends Controller {
      */
     public function destroy(Channel $channel) {
         $channel->delete();
+        $channel->clearMediaCollection('covers');
         return response()->json([
             'data' => [],
             'success' => 'deleted successfully',

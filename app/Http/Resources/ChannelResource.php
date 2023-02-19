@@ -15,6 +15,7 @@ class ChannelResource extends JsonResource {
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'cover' => $this->getMedia('covers'),
             'link_youtube' => $this->link_youtube,
             'ispublish' => $this->ispublish,
         ];

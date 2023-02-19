@@ -24,6 +24,7 @@ class StoreChannelRequest extends FormRequest {
             'title' => 'required|max:255|string',
             'link_youtube' => 'required|max:255|string',
             'ispublish' => 'required|boolean',
+            'cover' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ];
     }
 }
