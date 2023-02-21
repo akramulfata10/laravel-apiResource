@@ -17,6 +17,7 @@ class ChannelFactory extends Factory {
         return [
             'title' => $this->faker->word(),
             'link_youtube' => 'https://www.youtube.com/@akramulfata9815',
+            'cover' => $this->faker->imageUrl(640, 480, 'animals', true),
             'ispublish' => 1,
         ];
     }
